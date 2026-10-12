@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Changed
+- removed the supporter certificate requirement for SOCKS5 proxy configuration and connections in SbieDll and the Plus UI
+
 
 
 ## [1.18.6 / 5.73.6] - 2026-10-11

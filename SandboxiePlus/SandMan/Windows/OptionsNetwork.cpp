@@ -73,7 +73,6 @@ void COptionsWindow::CreateNetwork()
 
 	if (!g_CertInfo.opt_net) {
 		ui.tabDNS->setEnabled(false);
-		ui.tabNetProxy->setEnabled(false);
 	}
 
 	ui.chkProxyResolveHostnames->setVisible(false);
