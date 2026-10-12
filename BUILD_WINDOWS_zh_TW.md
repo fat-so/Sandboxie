@@ -135,9 +135,20 @@ call Installer\copy_build.cmd x64 build_qt6
 | `msbuild` 不是內部或外部命令 | 使用 VS 2022 Developer Command Prompt。 |
 | 找不到 `WindowsKernelModeDriver10.0` | 確認已安裝 WDK、其 VS 整合元件，以及 build number 相同的 SDK。 |
 | 找不到 MFC 標頭或程式庫 | 補裝適用於 x64／x86 的 C++ MFC 元件。 |
+| `sbieiniserver.cpp` 的 `C4819`／`C2220`，提到字碼頁 950 | 先更新 fork；此檔案已加上 UTF-8 BOM，讓 MSVC 正確辨識編碼。保持 `/WX`，並確認編輯器儲存時保留 BOM。 |
 | SbieShell 找不到 `v142` 或 `10.0.19041.0` | 補裝 MSVC v142 與 Windows 10 SDK `10.0.19041.0`。 |
 | 找不到 `qmake.exe` 或 `jom.exe` | 確認下載腳本成功、7-Zip 位於指定位置，並檢查儲存庫旁的 `Qt` 目錄。 |
 | `copy_build.cmd` 找不到來源檔案 | 確認前面的核心、Plus、Shell、工具及相依套件步驟皆已成功。 |
+
+`C2220` 表示某個警告被當成錯誤，仍須查看同一份輸出的 `warning Cxxxx`／`警告 Cxxxx` 才能確定原因。`C4819` 的編碼問題與處理方式見 [Microsoft 文件](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-1-c4819?view=msvc-170)。
+
+已 clone 的使用者可在自己的儲存庫根目錄更新並重試 Win32 建置（以下使用此問題回報中的路徑）：
+
+```bat
+cd /d C:\Users\User1\Sandboxie
+git pull --ff-only origin master
+msbuild Sandboxie\SandboxDll.sln /t:Build /p:Configuration=SbieRelease /p:Platform=Win32 /m:8
+```
 
 回報錯誤時，提供執行的指令、第一個錯誤及其前後約 20 行輸出。
 

@@ -13,6 +13,9 @@ indent_size = 4
 [my_version.h]
 charset = utf-8-bom
 
+[Sandboxie/core/svc/sbieiniserver.cpp]
+charset = utf-8-bom
+
 [SandboxiePlus/SandMan/Troubleshooting/lang_*.json]
 charset = utf-8-bom
 
