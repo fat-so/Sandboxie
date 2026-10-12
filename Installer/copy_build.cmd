@@ -11,27 +11,29 @@ IF "%openssl_version:~0,3%" == "1.1" ( set "sslMajorVersion=1_1" ) ELSE ( set "s
 
 IF %1 == x86 (
   set archPath=Win32
-  call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+  call "%~dp0setup_vs.cmd" Win32
+  if errorlevel 1 exit /b 1
   set qtPath=%~dp0..\..\Qt\%qt_version%\msvc2022
   set instPath=%~dp0\SbiePlus_x86
 )
 IF %1 == x64 (
   set archPath=x64
-  call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+  call "%~dp0setup_vs.cmd" x64
+  if errorlevel 1 exit /b 1
 REM  set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2022_64
   set qtPath=%~dp0..\..\Qt\%qt_version%\msvc2022_64
   set instPath=%~dp0\SbiePlus_x64
 )
 IF %1 == ARM64 (
   set archPath=ARM64
-  call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
+  call "%~dp0setup_vs.cmd" ARM64
+  if errorlevel 1 exit /b 1
   set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2022_arm64
   set instPath=%~dp0\SbiePlus_a64
   set "sslMajorVersion=1_1"
 )
 
 set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC143.CRT
-REM set redistPath="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\%VCToolsVersion%\%1\Microsoft.VC143.CRT"
 
 @echo on
 

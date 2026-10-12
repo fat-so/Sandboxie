@@ -19,7 +19,8 @@ IF %1 == Win32 (
   
   set build_arch=Win32
   set qt_params= 
-call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+call "%~dp0..\Installer\setup_vs.cmd" Win32
+  if errorlevel 1 exit /b 1
 )
 IF %1 == x64 (
   set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2022_64
@@ -31,7 +32,8 @@ REM  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt6_version%\msvc2022_64\include\QtCore\%q
   
   set build_arch=x64
   set qt_params= 
-  call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+  call "%~dp0..\Installer\setup_vs.cmd" x64
+  if errorlevel 1 exit /b 1
 )
 IF %1 == ARM64 (
   set qt_path=%~dp0..\..\Qt\%qt6_version%\msvc2022_64
@@ -66,7 +68,8 @@ REM type %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\target_qt.conf
   set qt_params=-qtconf "%~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf"
   
 REM  set VSCMD_DEBUG=3
-call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
+call "%~dp0..\Installer\setup_vs.cmd" ARM64
+  if errorlevel 1 exit /b 1
 )
 @echo on
 

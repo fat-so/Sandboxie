@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Changed
+- added Visual Studio 2022 edition discovery for Plus build and assembly scripts, with a Traditional Chinese x64 Windows build guide
 - removed the supporter certificate requirement for SOCKS5 proxy configuration and connections in SbieDll and the Plus UI
 
 

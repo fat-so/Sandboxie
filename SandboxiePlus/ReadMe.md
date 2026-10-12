@@ -1,5 +1,7 @@
 ## Sandboxie Plus build instructions
 
+- For Traditional Chinese x64 Windows instructions, see [BUILD_WINDOWS_zh_TW.md](../BUILD_WINDOWS_zh_TW.md).
+
 - Please note: there is another [ReadMe.md](../Installer/ReadMe.md) file that explains how to create the Sandboxie Plus installers.
 - Please note: the following instructions may lag behind the [CI workflow](../.github/workflows/main.yml), so be aware of any version change.
 
@@ -10,13 +12,14 @@ Sandboxie Plus builds under Visual Studio 2022 and uses the Sandboxie Classic co
 3) Install 7-Zip in `C:\Program Files\7-Zip`
 4) Build Sandboxie Classic using the commands in the Classic build instructions
 5) The Qt version is defined in [`Installer\buildVariables.cmd`](../Installer/buildVariables.cmd); `install_qt.cmd` downloads the matching Qt 6 build
-   - The scripts use the Visual Studio 2022 Enterprise `vcvars*.bat` path used by CI; if you use Community or Professional, update that path in `qmake_plus.cmd` and `copy_build.cmd`
+   - `qmake_plus.cmd` and `copy_build.cmd` use `Installer/setup_vs.cmd` to locate Visual Studio 2022 through `vswhere`, including Community, Professional, Enterprise, and compatible Build Tools installations
 6) From a Visual Studio 2022 Developer Command Prompt in the repository root, run:
 
 ```bat
 SandboxiePlus\install_qt.cmd x64
 SandboxiePlus\install_jom.cmd
 SandboxiePlus\qmake_plus.cmd x64 build_qt6
+cd ..
 msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
 msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
 Installer\fix_qt5_languages.cmd x64 build_qt6
