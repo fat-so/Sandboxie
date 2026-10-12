@@ -9,7 +9,7 @@ if not exist "%sbie_vswhere%" (
 )
 
 set "sbie_vsroot="
-for /f "usebackq delims=" %%I in (`"%sbie_vswhere%" -latest -products * -version "[17.0,18.0)" -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "sbie_vsroot=%%I"
+for /f "usebackq delims=" %%I in (`""%sbie_vswhere%" -latest -products * -version "[17.0,18.0)" -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath"`) do set "sbie_vsroot=%%I"
 if not defined sbie_vsroot (
   echo Visual Studio 2022 with x86/x64 C++ build tools was not found. >&2
   exit /b 1
